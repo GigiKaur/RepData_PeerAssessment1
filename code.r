@@ -1,6 +1,7 @@
 library(ggplot2)
 library(dplyr)
 
+#Load data
 if (!file.exists("./data")) {
   dir.create("./data")
 }
@@ -12,6 +13,7 @@ unzip(zipfile = "./data/activity.zip", exdir = "./data")
 activity <- read.csv("./data/activity.csv")
 activity$date <- as.Date(activity$date)
 
+#Section 1
 # Analysis
 stepsPerDay <- activity %>%
   group_by(date) %>%
@@ -37,6 +39,8 @@ plot(stepsPerInterval$meansteps ~ stepsPerInterval$interval,
 
 print(paste("5-Minute Interval containing the most steps on average: ", stepsPerInterval$interval[which.max(stepsPerInterval$meansteps)]))
 print(paste("Average steps for that interval: ", round(max(stepsPerInterval$meansteps))))
+
+#Section 3
 print(paste("The total number of rows with NA is: ", sum(is.na(activity$steps))))
 
 # Replace NA values with interval mean
